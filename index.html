@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="pages/index.css">
+  <title>Mesto</title>
+</head>
+
+<body class="page">
+  <header class="header">
+    <img src="images/svg/logo.svg" alt="Лого" class="logo">
+  </header>
+
+  <main class="content">
+    <section class="profile">
+      <img src="images/avatar.jpg" alt="Аватар" class="profile__avatar">
+      <div class="profile__info">
+        <h1 class="profile__username">Жак-Ив Кусто</h1>
+        <button class="profile__edit-btn btn-decoration" type="button"></button>
+        <p class="profile__description">Исследователь океана</p>
+      </div>
+      <button class="profile__add-btn btn-decoration" type="button"></button>
+    </section>
+
+    <section class="elements">
+      <ul class="elements__list">
+        <li class="element">
+          <img src="images/elements/Moscow.jpg" alt="Москва" class="element__image">
+          <div class="element__info">
+            <h2 class="element__title">Москва Москва Москва Москва</h2>
+            <button type="button" class="element__like-btn btn-decoration"></button>
+          </div>
+        </li>
+
+        <li class="element">
+          <img src="images/elements/Paris.jpg" alt="Париж" class="element__image">
+          <div class="element__info">
+            <h2 class="element__title">Париж</h2>
+            <button type="button" class="element__like-btn btn-decoration"></button>
+          </div>
+        </li>
+
+        <li class="element">
+          <img src="images/elements/Berlin.jpg" alt="Берлин" class="element__image">
+          <div class="element__info">
+            <h2 class="element__title">Берлин</h2>
+            <button type="button" class="element__like-btn btn-decoration"></button>
+          </div>
+        </li>
+
+        <li class="element">
+          <img src="images/elements/Beijing.jpg" alt="Пекин" class="element__image">
+          <div class="element__info">
+            <h2 class="element__title">Пекин</h2>
+            <button type="button" class="element__like-btn btn-decoration"></button>
+          </div>
+        </li>
+
+        <li class="element">
+          <img src="images/elements/London.jpg" alt="Лондон" class="element__image">
+          <div class="element__info">
+            <h2 class="element__title">Лондон</h2>
+            <button type="button" class="element__like-btn btn-decoration"></button>
+          </div>
+        </li>
+
+        <li class="element">
+          <img src="images/elements/Washington.jpg" alt="Вашингтон" class="element__image">
+          <div class="element__info">
+            <h2 class="element__title">Вашингтон</h2>
+            <button type="button" class="element__like-btn btn-decoration"></button>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p class="footer__copyright">© 2020 Mesto Russia</p>
+  </footer>
+
+  <div class="popup">
+    <form class="popup__container">
+      <p class="popup__title">Редактировать профиль</p>
+      <fieldset class="popup__input-container">
+        <label for="name" class="popup__label"></label>
+        <input type="text" id="name" name="name" placeholder="Имя" class="popup__item popup__item_type_name">
+        <label for="description" class="popup__label"></label>
+        <input type="text" id="description" name="description" placeholder="Описание"
+          class="popup__item popup__item_type_description">
+      </fieldset>
+      <fieldset class="popup__handlers">
+        <input type="submit" class="popup__confirm-btn btn-decoration" value="Сохранить">
+      </fieldset>
+      <button class="popup__close-btn btn-decoration" type="button"></button>
+    </form>
+  </div>
+
+  <script src="pages/index.js"></script>
+</body>
+
+</html>
