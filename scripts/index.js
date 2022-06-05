@@ -1,6 +1,6 @@
 const content = document.querySelector('.content');
-const editButton = content.querySelector('.profile__edit-btn_action_edit');
-const addButton = content.querySelector('.profile__add-btn_action_add');
+const buttonEdit = content.querySelector('.profile__edit-btn_action_edit');
+const buttonAdd = content.querySelector('.profile__add-btn_action_add');
 const nameContent = content.querySelector('.profile__username');
 const jobContent = content.querySelector('.profile__description');
 const cardsContainer = content.querySelector('.cards__list');
@@ -11,13 +11,13 @@ const popupEdit = document.querySelector('.popup_profile');
 const popupPlace = document.querySelector('.popup_place');
 const popupFullscreen = document.querySelector('.popup_fullscreen');
 
-const editFormElement = document.querySelector('.popup__container_type_edit');
-const nameInput = editFormElement.querySelector('.popup__item_type_name');
-const jobInput = editFormElement.querySelector('.popup__item_type_description');
+const formElementEdit = document.querySelector('.popup__container_type_edit');
+const nameInput = formElementEdit.querySelector('.popup__item_type_name');
+const jobInput = formElementEdit.querySelector('.popup__item_type_description');
 
-const addFormElement = document.querySelector('.popup__container_type_add');
-const placeInput = addFormElement.querySelector('.popup__item_type_place');
-const placeUrl = addFormElement.querySelector('.popup__item_type_place-url');
+const formElementAdd = document.querySelector('.popup__container_type_add');
+const placeInput = formElementAdd.querySelector('.popup__item_type_place');
+const placeUrl = formElementAdd.querySelector('.popup__item_type_place-url');
 
 
 const initialCards = [
@@ -47,10 +47,6 @@ const initialCards = [
   }
 ];
 
-initialCards.forEach(function(element) {
-  addCard(element.name, element.link);
-});
-
 function addCard(name, link) {
   const cardTemplate = document.querySelector('#card-template').content;
   const cardElement = cardTemplate.querySelector('.card').cloneNode(true);
@@ -71,6 +67,10 @@ function addCard(name, link) {
   cardElement.querySelector('.card__trash-btn_action_delete').addEventListener('click', deleteCard);
   cardsContainer.prepend(cardElement);
 }
+
+initialCards.forEach(function(element) {
+  addCard(element.name, element.link);
+});
 
 function likeCard(evt) {
   evt.target.classList.toggle('card__like-btn_active');
@@ -105,21 +105,21 @@ function closePopup(evt) {
 }
 
 
-editButton.addEventListener('click', function () {
+buttonEdit.addEventListener('click', function () {
   openPopup(popupEdit);
   nameInput.value = nameContent.textContent;
   jobInput.value = jobContent.textContent;
 });
 
-editFormElement.addEventListener('submit', function (evt) {
+formElementEdit.addEventListener('submit', function (evt) {
   editFormSubmitHandler(evt);
 });
 
 
-addButton.addEventListener('click', function () {
+buttonAdd.addEventListener('click', function () {
   openPopup(popupPlace);
 });
 
-addFormElement.addEventListener('submit', function (evt) {
+formElementAdd.addEventListener('submit', function (evt) {
   addFormSubmitHandler(evt);
 });
