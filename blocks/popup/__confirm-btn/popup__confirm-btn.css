@@ -13,6 +13,7 @@
   padding: 0;
   cursor: pointer;
   border-radius: 2px;
+  transition: all .2s ease-in-out;
 }
 
 .popup__confirm-btn:hover {
