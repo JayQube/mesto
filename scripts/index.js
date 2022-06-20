@@ -4,12 +4,16 @@ const buttonAdd = content.querySelector('.profile__add-btn');
 const nameContent = content.querySelector('.profile__username');
 const jobContent = content.querySelector('.profile__description');
 const cardsContainer = content.querySelector('.cards__list');
-
-const popupLists = document.querySelectorAll('.popup');
+const buttonCloseLists = document.querySelectorAll('.popup__close-btn');
 
 const popupEdit = document.querySelector('.popup_profile');
+const popupEditCloseButton = popupEdit.querySelector('.popup__close-btn');
+
 const popupPlace = document.querySelector('.popup_place');
+const popupPlaceCloseButton = popupPlace.querySelector('.popup__close-btn');
+
 const popupFullscreen = document.querySelector('.popup_fullscreen');
+const popupFullscreenCloseButton = popupFullscreen.querySelector('.popup__close-btn');
 
 const formElementEdit = document.forms.editProfileForm;
 const nameInput = formElementEdit.elements.username;
@@ -17,7 +21,7 @@ const jobInput = formElementEdit.elements.description;
 
 const formElementAdd = document.forms.addCardForm;
 const placeInput = formElementAdd.elements.place;
-const placeUrl = formElementAdd.elements.place_url;
+const placeUrl = formElementAdd.elements.url;
 
 
 const initialCards = [
@@ -55,35 +59,24 @@ const deleteCard = (evt) => {
   evt.target.closest('.card').remove();
 }
 
-const removeListeners = () => {
-  document.removeEventListener('keydown', closePopupEscAndClick);
-  document.removeEventListener('click', closePopupEscAndClick);
+const closePopup = (popupElement) => {
+  popupElement.classList.remove('popup_opened');
+  document.removeEventListener('keydown', closePopupEsc);
 }
 
-const closePopupEscAndClick = (evt) => {
-  if (evt.key === 'Escape' || evt.target.classList.contains('popup_opened')) {
-    popupLists.forEach((popup) => {
-      if (popup.classList.contains('popup_opened')) {
-        popup.classList.remove('popup_opened');
-      }
-    })
-    removeListeners();
+const closePopupEsc = (evt) => {
+  if (evt.key === 'Escape') {
+    closePopup(document.querySelector('.popup_opened'));
   }
 }
 
-const closePopup = (evt) => {
-  evt.target.closest('.popup').classList.remove('popup_opened');
-  removeListeners();
+const closePopupMousedown = (evt) => {
+  closePopup(evt.target);
 }
 
 const openPopup = (popupElement) => {
-  const buttonClose = popupElement.querySelector('.popup__close-btn');
-
     popupElement.classList.add('popup_opened');
-  
-    document.addEventListener('keydown', closePopupEscAndClick);
-    document.addEventListener('click', closePopupEscAndClick);
-    buttonClose.addEventListener('click', closePopup);
+    document.addEventListener('keydown', closePopupEsc); 
 }
 
 const zoomImage = (name, link) => {
@@ -127,14 +120,14 @@ const editFormSubmitHandler = (evt) => {
   evt.preventDefault();
     nameContent.textContent = nameInput.value;
     jobContent.textContent = jobInput.value;
-  closePopup(evt);
+  closePopup(popupEdit);
 }
 
 const addFormSubmitHandler = (evt) => {
   evt.preventDefault();
   const card = createCard(placeInput.value, placeUrl.value);
   cardsContainer.prepend(card);
-  closePopup(evt);
+  closePopup(popupPlace);
 }
 
 const checkProfileInfo = () => {
@@ -143,6 +136,8 @@ const checkProfileInfo = () => {
 }
 
 
+
+popupEdit.addEventListener('mousedown', closePopupMousedown);
 
 buttonEdit.addEventListener('click', () => {
   checkProfileInfo();
@@ -153,6 +148,11 @@ formElementEdit.addEventListener('submit', (evt) => {
   editFormSubmitHandler(evt);
 });
 
+popupEditCloseButton.addEventListener('click', () => {
+  closePopup(popupEdit);
+})
+
+popupPlace.addEventListener('mousedown', closePopupMousedown);
 
 buttonAdd.addEventListener('click', () => {
   formElementAdd.reset();
@@ -162,3 +162,13 @@ buttonAdd.addEventListener('click', () => {
 formElementAdd.addEventListener('submit', (evt) => {
   addFormSubmitHandler(evt);
 });
+
+popupPlaceCloseButton.addEventListener('click', () => {
+  closePopup(popupPlace);
+})
+
+popupFullscreen.addEventListener('mousedown', closePopupMousedown);
+
+popupFullscreenCloseButton.addEventListener('click', () => {
+  closePopup(popupFullscreen);
+})
