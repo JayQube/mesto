@@ -4,7 +4,6 @@ const buttonAdd = content.querySelector('.profile__add-btn');
 const nameContent = content.querySelector('.profile__username');
 const jobContent = content.querySelector('.profile__description');
 const cardsContainer = content.querySelector('.cards__list');
-const buttonCloseLists = document.querySelectorAll('.popup__close-btn');
 
 const popupEdit = document.querySelector('.popup_profile');
 const popupEditCloseButton = popupEdit.querySelector('.popup__close-btn');
@@ -14,6 +13,8 @@ const popupPlaceCloseButton = popupPlace.querySelector('.popup__close-btn');
 
 const popupFullscreen = document.querySelector('.popup_fullscreen');
 const popupFullscreenCloseButton = popupFullscreen.querySelector('.popup__close-btn');
+const popupImage = popupFullscreen.querySelector('.popup__image');
+const popupCaption = popupFullscreen.querySelector('.popup__caption');
 
 const formElementEdit = document.forms.editProfileForm;
 const nameInput = formElementEdit.elements.username;
@@ -71,7 +72,9 @@ const closePopupEsc = (evt) => {
 }
 
 const closePopupMousedown = (evt) => {
-  closePopup(evt.target);
+  if (evt.target.classList.contains('popup_opened')) {
+    closePopup(evt.target);
+  }
 }
 
 const openPopup = (popupElement) => {
@@ -80,12 +83,9 @@ const openPopup = (popupElement) => {
 }
 
 const zoomImage = (name, link) => {
-  const popupImage = document.querySelector('.popup__image');
-  const popupCaption = document.querySelector('.popup__caption');
-
-    popupImage.src = link;
-    popupImage.alt = name;
-    popupCaption.textContent = name;
+  popupImage.src = link;
+  popupImage.alt = name;
+  popupCaption.textContent = name;
 
   openPopup(popupFullscreen);
 }
@@ -117,14 +117,12 @@ initialCards.forEach((element) => {
 });
 
 const editFormSubmitHandler = (evt) => {
-  evt.preventDefault();
     nameContent.textContent = nameInput.value;
     jobContent.textContent = jobInput.value;
   closePopup(popupEdit);
 }
 
 const addFormSubmitHandler = (evt) => {
-  evt.preventDefault();
   const card = createCard(placeInput.value, placeUrl.value);
   cardsContainer.prepend(card);
   closePopup(popupPlace);
@@ -134,7 +132,6 @@ const checkProfileInfo = () => {
   nameInput.value = nameContent.textContent;
   jobInput.value = jobContent.textContent;
 }
-
 
 
 popupEdit.addEventListener('mousedown', closePopupMousedown);
@@ -150,7 +147,7 @@ formElementEdit.addEventListener('submit', (evt) => {
 
 popupEditCloseButton.addEventListener('click', () => {
   closePopup(popupEdit);
-})
+});
 
 popupPlace.addEventListener('mousedown', closePopupMousedown);
 
