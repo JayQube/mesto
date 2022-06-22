@@ -50,10 +50,6 @@ const setEventListeners = (keys, formElement) => {
       toggleButtonState(keys, inputList, buttonElement);
     });
   });
-  formElement.addEventListener('submit', (evt) => {
-    evt.preventDefault();
-    disableButton(keys, buttonElement);
-  })
 }; 
 
 const enableValidation = ({...keys}) => {

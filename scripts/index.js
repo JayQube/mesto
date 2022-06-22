@@ -23,6 +23,7 @@ const jobInput = formElementEdit.elements.description;
 const formElementAdd = document.forms.addCardForm;
 const placeInput = formElementAdd.elements.place;
 const placeUrl = formElementAdd.elements.url;
+const placeConfirmButton = formElementAdd.querySelector('.popup__confirm-btn');
 
 
 const initialCards = [
@@ -117,12 +118,14 @@ initialCards.forEach((element) => {
 });
 
 const editFormSubmitHandler = (evt) => {
+  evt.preventDefault();
     nameContent.textContent = nameInput.value;
     jobContent.textContent = jobInput.value;
   closePopup(popupEdit);
 }
 
 const addFormSubmitHandler = (evt) => {
+  evt.preventDefault();
   const card = createCard(placeInput.value, placeUrl.value);
   cardsContainer.prepend(card);
   closePopup(popupPlace);
@@ -153,6 +156,8 @@ popupPlace.addEventListener('mousedown', closePopupMousedown);
 
 buttonAdd.addEventListener('click', () => {
   formElementAdd.reset();
+  placeConfirmButton.classList.add('popup__confirm-btn_disabled');
+  placeConfirmButton.setAttribute('disabled', true);
   openPopup(popupPlace);
 });
 
