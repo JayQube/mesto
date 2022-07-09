@@ -1,8 +1,10 @@
+import { openPopup } from './index.js';
+
 class Card {
-  constructor(cardTitle, cardImage, templateSelector, cardConfig) {
+  constructor(cardTitle, cardImage, cardConfig) {
     this._cardTitle = cardTitle;
     this._cardImage = cardImage;
-    this._template = templateSelector;
+    this._template = document.querySelector(cardConfig.cardTemplateSelector);
     this._cardConfig = cardConfig;
   }
 
@@ -30,27 +32,7 @@ class Card {
   }
 
   _handleDeleteClick() {
-    this._element
-      .querySelector(this._cardConfig.cardTrashButtonSelector)
-      .closest(this._cardConfig.cardElementSelector)
-      .remove();
-  }
-
-  _closePopup(evt) {
-    evt.target.querySelector(this._cardConfig.popupFullscreenSelector)
-      .classList.remove(this._cardConfig.popupOpenedClass);
-    document.removeEventListener('keydown', this._closePopupEscape);
-  }
-
-  _closePopupEscape = (evt) => {
-    if (evt.key === 'Escape') {
-      this._closePopup(evt);
-    }
-  }
-
-  _openPopup() {
-    this._popup.classList.add(this._cardConfig.popupOpenedClass);
-    document.addEventListener('keydown', this._closePopupEscape);
+    this._element.remove();
   }
 
   _handleImageClick() {
@@ -58,7 +40,7 @@ class Card {
     this._popup.querySelector(this._cardConfig.popupImageSelector).src = this._cardImage;
     this._popup.querySelector(this._cardConfig.popupImageSelector).alt = this._cardTitle;
     this._popup.querySelector(this._cardConfig.popupCaptionSelector).textContent = this._cardTitle;
-    this._openPopup();
+    openPopup(this._popup);
   }
 
   _setEventListeners() {
