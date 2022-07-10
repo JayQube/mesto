@@ -49,6 +49,9 @@ const validationConfig = {
   errorClass: 'popup__error_visible'
 }
 
+const formEditValidator = new FormValidator(validationConfig, formElementEdit);
+const formAddValidator = new FormValidator(validationConfig, formElementAdd);
+
 const createCard = (name, link) => {
   const card = new Card(name, link, cardConfig);
   const cardElement = card.generateCard();
@@ -86,26 +89,6 @@ const openPopup = (popupElement) => {
   document.addEventListener('keydown', closePopupEsc);
 }
 
-const setEnableButton = (validationConfig, formElement) => {
-  const formValidator = new FormValidator(validationConfig, formElement);
-  formValidator.enableButton();
-}
-
-const setDisableButton = (validationConfig, formElement) => {
-  const formValidator = new FormValidator(validationConfig, formElement);
-  formValidator.disableButton();
-}
-
-const setResetErrors = (validationConfig, formElement) => {
-  const formValidator = new FormValidator(validationConfig, formElement);
-  formValidator.resetErrors();
-}
-
-const setFormValidator = (validationConfig, formElement) => {
-  const formValidator = new FormValidator(validationConfig, formElement);
-  formValidator.enableValidation();
-}
-
 const editFormSubmitHandler = (evt) => {
   evt.preventDefault();
   nameContent.textContent = nameInput.value;
@@ -130,8 +113,8 @@ popupEdit.addEventListener('mousedown', closePopupMousedown);
 buttonEdit.addEventListener('click', () => {
   checkProfileInfo();
   openPopup(popupEdit);
-  setResetErrors(validationConfig, formElementEdit);
-  setEnableButton(validationConfig, formElementEdit);
+  formEditValidator.resetErrors();
+  formEditValidator.enableButton();
 });
 
 formElementEdit.addEventListener('submit', (evt) => {
@@ -148,8 +131,8 @@ popupPlace.addEventListener('mousedown', closePopupMousedown);
 buttonAdd.addEventListener('click', () => {
   formElementAdd.reset();
   openPopup(popupPlace);
-  setResetErrors(validationConfig, formElementAdd);
-  setDisableButton(validationConfig, formElementAdd);
+  formAddValidator.resetErrors();
+  formAddValidator.disableButton();
 });
 
 formElementAdd.addEventListener('submit', (evt) => {
@@ -168,7 +151,7 @@ popupFullscreenCloseButton.addEventListener('click', () => {
   closePopup(popupFullscreen);
 })
 
-setFormValidator(validationConfig, formElementEdit);
-setFormValidator(validationConfig, formElementAdd);
+formEditValidator.enableValidation();
+formAddValidator.enableValidation();
 
 export { openPopup };
