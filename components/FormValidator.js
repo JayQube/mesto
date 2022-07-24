@@ -1,9 +1,9 @@
-class FormValidator {
+export default class FormValidator {
   constructor(validationConfig, formElement) {
     this._validationConfig = validationConfig;
-    this._formElement = formElement;
-    this._submitButtonSelector = formElement.querySelector(validationConfig.submitButtonSelector);
-    this._inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+    this._formElement = document.querySelector(formElement);
+    this._submitButtonSelector = this._formElement.querySelector(validationConfig.submitButtonSelector);
+    this._inputList = Array.from(this._formElement.querySelectorAll(validationConfig.inputSelector));
   }
 
   _showInputError(formElement, inputElement, errorMessage) {
@@ -72,5 +72,3 @@ class FormValidator {
     this._setEventListeners();
   };
 }
-
-export { FormValidator };
