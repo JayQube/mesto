@@ -1,20 +1,20 @@
 export default class FormValidator {
   constructor(validationConfig, formElement) {
     this._validationConfig = validationConfig;
-    this._formElement = document.querySelector(formElement);
+    this._formElement = formElement;
     this._submitButtonSelector = this._formElement.querySelector(validationConfig.submitButtonSelector);
     this._inputList = Array.from(this._formElement.querySelectorAll(validationConfig.inputSelector));
   }
 
-  _showInputError(formElement, inputElement, errorMessage) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  _showInputError(inputElement, errorMessage) {
+    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.add(this._validationConfig.inputErrorClass);
     errorElement.textContent = errorMessage;
     errorElement.classList.add(this._validationConfig.errorClass);
   };
 
-  _hideInputError(formElement, inputElement) {
-    const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  _hideInputError(inputElement) {
+    const errorElement = this._formElement.querySelector(`.${inputElement.id}-error`);
     inputElement.classList.remove(this._validationConfig.inputErrorClass);
     errorElement.classList.remove(this._validationConfig.errorClass);
     errorElement.textContent = '';
@@ -22,9 +22,9 @@ export default class FormValidator {
 
   _isValid(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(this._formElement, inputElement, inputElement.validationMessage);
+      this._showInputError(inputElement, inputElement.validationMessage);
     } else {
-      this._hideInputError(this._formElement, inputElement);
+      this._hideInputError(inputElement);
     }
   };
 
@@ -64,7 +64,7 @@ export default class FormValidator {
 
   resetErrors() {
       this._inputList.forEach((inputElement) => {
-      this._hideInputError(this._formElement, inputElement);
+      this._hideInputError(inputElement);
     })
   };
 

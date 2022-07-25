@@ -9,6 +9,8 @@ import UserInfo from '../components/UserInfo.js';
 import {
   buttonEdit,
   buttonAdd,
+  formEditElement,
+  formAddElement,
   userNameSelector,
   userDescriptionSelector,
   formEditSelector,
@@ -23,8 +25,8 @@ import {
  } from '../utils/constants.js';
 
 
-const formEditValidator = new FormValidator(validationConfig, formEditSelector);
-const formAddValidator = new FormValidator(validationConfig, formAddSelector);
+const formEditValidator = new FormValidator(validationConfig, formEditElement);
+const formAddValidator = new FormValidator(validationConfig, formAddElement);
 
 const popupWithImage = new PopupWithImage(popupFullscreenSelector, popupConfig);
 
@@ -48,11 +50,10 @@ const popupAdd = new PopupWithForm({
 
 const createCard = ({ item }) => {
   const card = new Card({
-    cardTitle: item.place,
-    cardImage: item.url,
+    titlePlace: item.place,
+    imageUrl: item.url,
     handleCardClick: () => {
       popupWithImage.open({ item });
-      popupWithImage.setEventListeners();
     }
   },
     cardConfig
@@ -73,19 +74,22 @@ const section = new Section({
 section.renderItems();
 
 buttonEdit.addEventListener('click', () => {
-  popupEdit.checkProfileInfo(userInfo.getUserInfo());
-  popupEdit.setEventListeners();
+  popupEdit.setInputsValues(userInfo.getUserInfo());
   popupEdit.open();
   formEditValidator.resetErrors();
   formEditValidator.enableButton();
 });
 
 buttonAdd.addEventListener('click', () => {
-  popupAdd.setEventListeners();
   popupAdd.open();
   formAddValidator.resetErrors();
   formAddValidator.disableButton();
 });
+
+popupWithImage.setEventListeners();
+popupEdit.setEventListeners();
+popupAdd.setEventListeners();
+
 
 formEditValidator.enableValidation();
 formAddValidator.enableValidation();

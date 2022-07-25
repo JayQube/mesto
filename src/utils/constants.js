@@ -2,6 +2,9 @@ export const content = document.querySelector('.content');
 export const buttonEdit = content.querySelector('.profile__edit-btn');
 export const buttonAdd = content.querySelector('.profile__add-btn');
 
+export const formEditElement = document.querySelector('.popup__container_type_edit');
+export const formAddElement = document.querySelector('.popup__container_type_add');
+
 export const userNameSelector = '.profile__username';
 export const userDescriptionSelector = '.profile__description';
 
@@ -12,11 +15,6 @@ export const containerSelector = '.cards__list';
 export const popupEditSelector = '.popup_profile';
 export const popupAddSelector = '.popup_place';
 export const popupFullscreenSelector = '.popup_fullscreen';
-
-export const inputSelector = '.popup__item';
-
-export const closeButtonSelector = '.popup__close-btn';
-export const popupOpenedClass = 'popup_opened';
 
 export const popupConfig = {
   popupImageSelector: '.popup__image',
