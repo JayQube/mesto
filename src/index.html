@@ -15,7 +15,11 @@
 
   <main class="content">
     <section class="profile">
-      <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+      <div class="profile__avatar-container">
+        <img src="<%=require('./images/avatar.jpg')%>" alt="Аватар" class="profile__avatar">
+        <div class="profile__overlay"></div>
+      </div>
+      
       <div class="profile__info">
         <h1 class="profile__username">Жак-Ив Кусто</h1>
         <button class="profile__edit-btn btn-decoration" type="button"></button>
@@ -35,8 +39,21 @@
     <p class="footer__copyright">© 2020 Mesto Russia</p>
   </footer>
 
+  <div class="popup popup_avatar">
+    <form class="popup__container popup__container_type_avatar" name="avatar" action="#" method="post" novalidate>
+      <p class="popup__title">Редактировать профиль</p>
+      <fieldset class="popup__input-container">
+        <input type="text" id="avatar" name="avatar" placeholder="Ссылка на изображение" 
+          class="popup__item popup__item_type_name" required minlength="2" maxlength="40">
+          <span class="popup__error username-error"></span>
+          <input type="submit" class="popup__confirm-btn" value="Сохранить">
+      </fieldset>
+      <button class="popup__close-btn btn-decoration" type="button"></button>
+    </form>
+  </div>
+
   <div class="popup popup_profile">
-    <form class="popup__container popup__container_type_edit" name="editProfileForm" action="#" method="get" novalidate>
+    <form class="popup__container popup__container_type_edit" name="editProfileForm" action="#" method="post" novalidate>
       <p class="popup__title">Редактировать профиль</p>
       <fieldset class="popup__input-container">
         <input type="text" id="username" name="username" placeholder="Имя" 
@@ -52,7 +69,7 @@
   </div>
 
   <div class="popup popup_place">
-    <form class="popup__container popup__container_type_add" name="addCardForm" action="#" method="get" novalidate>
+    <form class="popup__container popup__container_type_add" name="addCardForm" action="#" method="post" novalidate>
       <p class="popup__title">Новое место</p>
       <fieldset class="popup__input-container">
         <input type="text" id="place" name="place" placeholder="Название" 
@@ -68,15 +85,23 @@
   </div>
 
   <div class="popup popup_fullscreen">
-     <div class="popup__image-container">
+    <div class="popup__image-container">
       <figure class="popup__figure">
         <img class="popup__image" src="#" alt="">
         <figcaption class="popup__caption"></figcaption>
       </figure>
       <button class="popup__close-btn btn-decoration" type="button"></button>
-     </div> 
-      
-    
+    </div> 
+  </div>
+
+  <div class="popup popup_confirm">
+    <form class="popup__container popup__container_type_confirm" name="confirm" action="#" method="get" novalidate>
+      <p class="popup__title">Вы уверены?</p>
+        <fieldset class="popup__input-container">
+          <input type="submit" class="popup__confirm-btn" value="Да">
+        </fieldset>
+      <button class="popup__close-btn btn-decoration" type="button"></button>
+    </form>
   </div>
 
   <template id="card-template">
@@ -85,7 +110,10 @@
       <button type="button" class="card__trash-btn card__trash-btn_action_delete btn-decoration"></button>
       <div class="card__info">
         <h2 class="card__title"></h2>
-        <button type="button" class="card__like-btn btn-decoration"></button>
+        <div class="card__likes-container">
+          <button type="button" class="card__like-btn btn-decoration"></button>
+          <p class="card__like-count">9</p>
+        </div>
       </div>
     </li>
   </template>

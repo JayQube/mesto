@@ -5,6 +5,7 @@ import FormValidator from '../components/FormValidator.js';
 import Section from '../components/Section.js';
 import PopupWithImage from '../components/PopupWithImage.js';
 import PopupWithForm from '../components/PopupWithForm.js';
+import PopupWithConfirm from '../components/PopupWithConfirm.js';
 import UserInfo from '../components/UserInfo.js';
 import {
   buttonEdit,
@@ -15,10 +16,12 @@ import {
   userDescriptionSelector,
   formEditSelector,
   formAddSelector,
+  formConfirmSelector,
   containerSelector,
   popupEditSelector,
   popupAddSelector,
   popupFullscreenSelector,
+  popupConfirmSelector,
   popupConfig,
   cardConfig,
   validationConfig
@@ -29,6 +32,14 @@ const formEditValidator = new FormValidator(validationConfig, formEditElement);
 const formAddValidator = new FormValidator(validationConfig, formAddElement);
 
 const popupWithImage = new PopupWithImage(popupFullscreenSelector, popupConfig);
+const popupWithConfirm = new PopupWithConfirm({
+  popupSelector: popupConfirmSelector,
+  formSelector: formConfirmSelector,
+  handleFormSubmit: () => {
+    const card = new Card({}, cardConfig);
+    card.handleDelete();
+  }
+});
 
 const userInfo = new UserInfo({ userNameSelector, userDescriptionSelector });
 
@@ -89,6 +100,7 @@ buttonAdd.addEventListener('click', () => {
 popupWithImage.setEventListeners();
 popupEdit.setEventListeners();
 popupAdd.setEventListeners();
+popupWithConfirm.setEventListeners();
 
 
 formEditValidator.enableValidation();

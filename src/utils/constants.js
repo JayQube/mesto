@@ -10,11 +10,13 @@ export const userDescriptionSelector = '.profile__description';
 
 export const formEditSelector = '.popup__container_type_edit';
 export const formAddSelector = '.popup__container_type_add';
+export const formConfirmSelector = '.popup__container_type_confirm';
 
 export const containerSelector = '.cards__list';
 export const popupEditSelector = '.popup_profile';
 export const popupAddSelector = '.popup_place';
 export const popupFullscreenSelector = '.popup_fullscreen';
+export const popupConfirmSelector = '.popup_confirm';
 
 export const popupConfig = {
   popupImageSelector: '.popup__image',
