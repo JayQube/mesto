@@ -1,6 +1,6 @@
 import Popup from "./Popup.js";
 
-export default class PopupWithConfirm extends Popup {
+export default class PopupWithConfirmation extends Popup {
   constructor({popupSelector, formSelector, handleFormSubmit}) {
     super(popupSelector);
     this._handleFormSubmit = handleFormSubmit;
@@ -11,8 +11,12 @@ export default class PopupWithConfirm extends Popup {
     super.setEventListeners();
     this._form.addEventListener('submit', (evt) => {
       evt.preventDefault();
-      this._handleFormSubmit();
-      this.close();
+      this._handleFormSubmit(this._cardItem);
     });
+  }
+
+  open(cardItem) {
+    this._cardItem = cardItem;
+    super.open();
   }
 }

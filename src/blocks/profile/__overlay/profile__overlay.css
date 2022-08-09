@@ -1,5 +1,5 @@
 .profile__overlay {
-  background: url(../../../images/svg/Edit_Avatar.svg) center no-repeat rgba(0,0,0,.8);
+  background: url(../../../images/svg/Edit_Icon.svg) center no-repeat rgba(0,0,0,.8);
   position: absolute;
   top: 0;
   cursor: pointer;
