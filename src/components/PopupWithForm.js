@@ -8,7 +8,6 @@ export default class PopupWithForm extends Popup {
     this._inputList = this._form.querySelectorAll('.popup__item');
     this._submitButton = this._popupElement.querySelector('.popup__confirm-btn');
     this._submitButtonValue = this._submitButton.value;
-    console.log(this._submitButtonValue)
   }
 
   _getInputValues() {

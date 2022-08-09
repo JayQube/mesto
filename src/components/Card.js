@@ -37,22 +37,12 @@ export default class Card {
     });
   }
 
-  _likeCard(cardItem) {
-    this._cardLikeButton.classList.add(this._cardConfig.cardLikeButtonClass);
-    this._handleLikeClick(cardItem);
-  }
-
-  _unlikeCard(cardItem) {
-    this._cardLikeButton.classList.remove(this._cardConfig.cardLikeButtonClass);
-    this._handkeUnlikeClick(cardItem);
-  }
-
   _setEventListeners() {
     this._cardLikeButton.addEventListener('click', () => {
       if(this._cardLikeButton.classList.contains(this._cardConfig.cardLikeButtonClass)) {
-        this._unlikeCard(this._cardItem);
+        this._handkeUnlikeClick(this._cardItem);
       } else {
-        this._likeCard(this._cardItem);
+        this._handleLikeClick(this._cardItem);
       }
     });
 
@@ -71,6 +61,10 @@ export default class Card {
 
   setLikes(res) {
     this._cardLikesCount.textContent = String(res.likes.length);
+  }
+
+  toggleLike() {
+    this._cardLikeButton.classList.toggle(this._cardConfig.cardLikeButtonClass);
   }
 
   generateCard() {

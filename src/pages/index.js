@@ -62,7 +62,6 @@ api.getInitialInformation()
     cardsData.reverse();
     myId = userData._id;
     userInfo.setUserInfo(userData);
-    userInfo.setUserAvatar(userData);
     section.renderItems(cardsData);
   })
   .catch((err) => {
@@ -76,15 +75,17 @@ const popupEdit = new PopupWithForm({
     popupEdit.renderLoading(true);
 
     api.setUserInfo(inputValues)
-      .then((text) => {
-        userInfo.setUserInfo(text);
+      .then((info) => {
+        userInfo.setUserInfo(info);
+      })
+      .then(() => {
+        popupEdit.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
         popupEdit.renderLoading(false);
-        popupEdit.close();
       })
   }
 });
@@ -96,15 +97,17 @@ const popupAvatar = new PopupWithForm({
     popupAvatar.renderLoading(true);
 
     api.setUserAvatar(inputValue)
-      .then((url) => {
-        userInfo.setUserAvatar(url);
+      .then((info) => {
+        userInfo.setUserInfo(info);
+      })
+      .then(() => {
+        popupAvatar.close();
       })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
         popupAvatar.renderLoading(false);
-        popupAvatar.close();
       })
   }
 });
@@ -119,12 +122,14 @@ const popupAdd = new PopupWithForm({
       .then((cardItem) => {
         section.addItem(createCard(cardItem));
       })
+      .then(() => {
+        popupAdd.close();
+      })
       .catch((err) => {
         console.log(err);
       })
       .finally(() => {
         popupAdd.renderLoading(false);
-        popupAdd.close();
       })
   }
 });
@@ -154,14 +159,16 @@ const createCard = (cardItem) => {
     handleLikeClick: (cardItem) => {
       api.likeCard(cardItem)
         .then((res) => {
-          card.setLikes(res)
+          card.toggleLike();
+          card.setLikes(res);
         })
         .catch(res => console.log(res))
     },
     handkeUnlikeClick: (cardItem) => {
       api.unlikeCard(cardItem)
         .then((res) => {
-          card.setLikes(res)
+          card.toggleLike();
+          card.setLikes(res);
         })
         .catch(res => console.log(res))
     },

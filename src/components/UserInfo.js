@@ -12,12 +12,9 @@ export default class UserInfo {
     };
   }
 
-  setUserAvatar(url) {
-    this._userAvatar.src = url.avatar;
-  }
-
-  setUserInfo(text) {
-    this._userName.textContent = text.name;
-    this._userAbout.textContent = text.about;
+  setUserInfo(info) {
+    this._userName.textContent = info.name;
+    this._userAbout.textContent = info.about;
+    this._userAvatar.src = info.avatar;
   }
 }
